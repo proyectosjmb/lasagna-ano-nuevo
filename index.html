@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lasaña Gourmet en Sartén · Año Nuevo</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="app-header">
+<h1>🍝 Lasaña Gourmet en Sartén</h1>
+<p class="subtitle">Cena de Año Nuevo · Sin horno</p>
+</header>
+
+
+<main id="app">
+<!-- Progreso -->
+<section class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</section>
+
+
+<!-- Wizard -->
+<section id="wizard" class="card"></section>
+
+
+<!-- Navegación -->
+<section class="nav-buttons">
+<button id="prevBtn">Anterior</button>
+<button id="nextBtn">Siguiente</button>
+</section>
+
+
+<!-- Ingredientes -->
+<section class="card">
+<h2>🧺 Checklist de Ingredientes</h2>
+<div id="ingredients"></div>
+<div class="actions">
+<button id="checkAll">Marcar todo</button>
+<button id="resetChecks">Reiniciar</button>
+</div>
+</section>
+
+
+<!-- Timers -->
+<section class="card">
+<h2>⏱️ Temporizadores</h2>
+<div id="timers"></div>
+<div class="actions">
+<label><input type="checkbox" id="muteToggle" /> Silenciar</label>
+</div>
+</section>
+
+
+<!-- Modo Familia -->
+<section class="card">
+<h2>👨‍👩‍👧‍👦 Modo Familia</h2>
+<input id="familyNames" placeholder="Nombres separados por coma" />
+<button id="spinWheel">🎡 Ruleta del Chef</button>
+<p id="chefResult"></p>
+</section>
+
+
+<!-- Notas -->
+<section class="card">
+<h2>📝 Momentos de la Noche</h2>
+<textarea id="notes" placeholder="Anota recuerdos, chistes, brindis..."></textarea>
+<input type="file" id="photoInput" accept="image/*" />
+<div id="photoPreview"></div>
+</section>
+
+
+<!-- Final -->
+<section id="finalScreen" class="card hidden"></section>
+</main>
+
+
+<footer class="app-footer">
+<button id="cleanMode">Modo limpio</button>
+<button onclick="window.print()">Imprimir</button>
+</footer>
+
+
+<script src="script.js"></script>
+</body>
+</html>
