@@ -1,74 +1,162 @@
 <!DOCTYPE html>
-<section class="card wizard">
-<div id="stepIndicator"></div>
-<h2 id="stepTitle"></h2>
-<p id="stepText"></p>
-<p class="tip" id="stepTip"></p>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lasaña de Año Nuevo - Mega Edition</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
+    <div id="confetti-container"></div>
+    
+    <nav class="top-nav glass">
+        <div class="logo">✨ 2024 Mega Feast</div>
+        <div class="nav-controls">
+            <button id="btn-clean-mode" class="icon-btn" title="Modo Limpio">👁️</button>
+            <button id="btn-print" class="icon-btn" title="Imprimir Receta">🖨️</button>
+            <button id="btn-reset-app" class="icon-btn danger" title="Reiniciar Todo">↻</button>
+        </div>
+    </nav>
 
-<div id="stepTimers" class="timer-buttons"></div>
+    <main class="app-container">
+        
+        <section id="screen-setup" class="screen active">
+            <div class="card glass text-center intro-card">
+                <h1>Lasaña Gourmet (Para un Batallón)</h1>
+                <p class="subtitle">Edición Familiar Año Nuevo</p>
+                <hr class="gold-line">
+                <p>¿Quiénes forman el equipo de cocina hoy?</p>
+                
+                <div class="family-input-group">
+                    <input type="text" id="input-name" placeholder="Nombre..." maxlength="15">
+                    <button id="btn-add-member" class="btn-primary">Añadir</button>
+                </div>
+                <ul id="family-list" class="family-list"></ul>
+                
+                <button id="btn-start-cooking" class="btn-gold large pulse" disabled>¡Comenzar Misión!</button>
+            </div>
+        </section>
 
+        <section id="screen-dashboard" class="screen hidden">
+            
+            <div id="gamification-bar" class="gamification-bar glass">
+                <div class="score-display">
+                    <span class="label">Puntos:</span>
+                    <span id="score-val">0</span>
+                </div>
+                <div id="badges-container" class="badges-row"></div>
+            </div>
 
-<div class="nav-buttons">
-<button id="prevBtn">← Anterior</button>
-<button id="nextBtn">Siguiente →</button>
-</div>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="tab-shopping">🛒 Compras</button>
+                <button class="tab-btn" data-target="tab-ingredients">🔪 Prep</button>
+                <button class="tab-btn" data-target="tab-wizard">🔥 Cocina</button>
+                <button class="tab-btn" data-target="tab-memories">📸 Bitácora</button>
+            </div>
 
+            <div id="tab-shopping" class="tab-content active glass-panel">
+                <h2>Operación Supermercado</h2>
+                <p class="intro-text">Antes de cocinar, asegura el cargamento. ¡Es mucho peso!</p>
+                <div class="progress-bar-container">
+                    <div id="shopping-progress" class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div id="shopping-list-container">
+                    </div>
+            </div>
 
-<div class="progress">
-<div class="progress-bar" id="progressBar"></div>
-</div>
-</section>
+            <div id="tab-ingredients" class="tab-content glass-panel">
+                <h2>Mise en Place (Preparación)</h2>
+                <p class="intro-text">Ahora toca lavar, picar y pesar todo lo que compramos.</p>
+                <div class="progress-bar-container">
+                    <div id="ingredients-progress" class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div id="ingredients-list">
+                    </div>
+            </div>
 
+            <div id="tab-wizard" class="tab-content glass-panel">
+                <div class="wizard-header">
+                    <span id="step-counter">Fase 1/4</span>
+                    <div class="progress-bar-container small">
+                        <div id="wizard-progress" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
 
-<!-- INGREDIENTES -->
-<section class="card">
-<h3>🧺 Ingredientes</h3>
-<div id="ingredients"></div>
-<div class="actions">
-<button id="checkAll">Marcar todo</button>
-<button id="resetChecks">Reiniciar</button>
-</div>
-</section>
+                <div id="wizard-card" class="step-card">
+                    <div class="role-assigner">
+                        <span class="label">Chef al mando:</span>
+                        <div class="roulette-container">
+                            <span id="current-chef-name">Todos</span>
+                            <button id="btn-spin-wheel" class="btn-icon-small">🎲</button>
+                        </div>
+                    </div>
 
+                    <h3 id="step-title">Título</h3>
+                    <div id="step-content" class="step-text"></div>
+                    
+                    <div id="chef-tip" class="tip-box hidden">
+                        <strong>💡 Tip del Chef:</strong> <span id="tip-text"></span>
+                    </div>
 
-<!-- TIMERS ACTIVOS -->
-<section class="card">
-<h3>⏱️ Temporizadores activos</h3>
-<label><input type="checkbox" id="muteToggle"> Silenciar</label>
-<div id="timers"></div>
-</section>
+                    <div id="step-timers-area" class="timers-area"></div>
+                </div>
 
+                <div class="wizard-controls">
+                    <button id="btn-prev-step" class="btn-secondary">Anterior</button>
+                    <button id="btn-next-step" class="btn-gold">Siguiente</button>
+                </div>
+            </div>
 
-<!-- MODO FAMILIA -->
-<section class="card">
-<h3>👨‍👩‍👧‍👦 Modo Familia</h3>
-<input id="familyNames" placeholder="Ej: Ana, Luis, Sofía" />
-<button id="spinWheel">🎡 Ruleta del Chef</button>
-<p id="chefResult"></p>
-</section>
+            <div id="tab-memories" class="tab-content glass-panel">
+                <h2>Bitácora de la Velada 📸</h2>
+                <p class="intro-text">Registra los hitos, bloopers y éxitos de la noche.</p>
+                
+                <div class="memory-input-box">
+                    <textarea id="new-memory-text" placeholder="¿Qué acaba de pasar? (Ej: '¡La cebolla huele increíble!')"></textarea>
+                    
+                    <div class="memory-controls">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="new-memory-photo" accept="image/*">
+                            <label for="new-memory-photo" class="btn-secondary small">📷 Adjuntar Foto</label>
+                            <span id="file-name-display">Sin foto</span>
+                        </div>
+                        <button id="btn-post-memory" class="btn-gold small">Publicar</button>
+                    </div>
+                </div>
 
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div id="memories-feed">
+                        <p class="empty-state-text">Aún no hay momentos registrados.</p>
+                    </div>
+                </div>
+            </div>
 
-<!-- MOMENTOS (COLAPSADO) -->
-<section class="card">
-<details>
-<summary>📝 Momentos de la Noche</summary>
-<textarea id="notes" placeholder="Recuerdos, chistes, brindis..."></textarea>
-<input type="file" id="photoInput" accept="image/*" />
-<div id="photoPreview"></div>
-</details>
-</section>
+        </section>
 
+        <section id="screen-finish" class="screen hidden">
+            <div class="card glass text-center">
+                <h1>¡Misión Cumplida! 🥂</h1>
+                <p>La Mega Lasaña está lista.</p>
+                <div class="summary-stats">
+                    <div class="stat-box">
+                        <span class="stat-num" id="final-score">0</span>
+                        <span class="stat-label">Puntos</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num" id="final-badges-count">0</span>
+                        <span class="stat-label">Badges</span>
+                    </div>
+                </div>
+                <div id="final-badges-display" class="badges-grid"></div>
+            </div>
+        </section>
 
-</main>
+    </main>
 
-
-<footer class="footer">
-<button onclick="document.body.classList.toggle('clean')">Modo limpio</button>
-<button onclick="window.print()">Imprimir</button>
-</footer>
-
-
-<script src="script.js"></script>
+    <div id="active-timers-container"></div>
+    <script src="script.js"></script>
 </body>
 </html>
