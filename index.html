@@ -58,22 +58,34 @@
 
             <div id="tab-shopping" class="tab-content active glass-panel">
                 <h2>Operación Supermercado</h2>
-                <p class="intro-text">Antes de cocinar, asegura el cargamento. ¡Es mucho peso!</p>
+                <div class="budget-control-panel">
+                    <div class="diners-row">
+                        <label>👥 Personas:</label>
+                        <input type="number" id="shopping-diners" value="10" min="1">
+                    </div>
+                    <div class="math-row">
+                        <div class="math-item">
+                            <small>Total Carrito</small>
+                            <span id="shopping-total" class="gold-text">$0.00</span>
+                        </div>
+                        <div class="math-item">
+                            <small>Por Persona</small>
+                            <span id="shopping-per-person" class="highlight-text">$0.00</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="progress-bar-container">
                     <div id="shopping-progress" class="progress-fill" style="width: 0%"></div>
                 </div>
-                <div id="shopping-list-container">
-                    </div>
+                <div id="shopping-list-container"></div>
             </div>
 
             <div id="tab-ingredients" class="tab-content glass-panel">
                 <h2>Mise en Place (Preparación)</h2>
-                <p class="intro-text">Ahora toca lavar, picar y pesar todo lo que compramos.</p>
                 <div class="progress-bar-container">
                     <div id="ingredients-progress" class="progress-fill" style="width: 0%"></div>
                 </div>
-                <div id="ingredients-list">
-                    </div>
+                <div id="ingredients-list"></div>
             </div>
 
             <div id="tab-wizard" class="tab-content glass-panel">
@@ -83,7 +95,6 @@
                         <div id="wizard-progress" class="progress-fill" style="width: 0%"></div>
                     </div>
                 </div>
-
                 <div id="wizard-card" class="step-card">
                     <div class="role-assigner">
                         <span class="label">Chef al mando:</span>
@@ -92,17 +103,13 @@
                             <button id="btn-spin-wheel" class="btn-icon-small">🎲</button>
                         </div>
                     </div>
-
                     <h3 id="step-title">Título</h3>
                     <div id="step-content" class="step-text"></div>
-                    
                     <div id="chef-tip" class="tip-box hidden">
                         <strong>💡 Tip del Chef:</strong> <span id="tip-text"></span>
                     </div>
-
                     <div id="step-timers-area" class="timers-area"></div>
                 </div>
-
                 <div class="wizard-controls">
                     <button id="btn-prev-step" class="btn-secondary">Anterior</button>
                     <button id="btn-next-step" class="btn-gold">Siguiente</button>
@@ -111,11 +118,8 @@
 
             <div id="tab-memories" class="tab-content glass-panel">
                 <h2>Bitácora de la Velada 📸</h2>
-                <p class="intro-text">Registra los hitos, bloopers y éxitos de la noche.</p>
-                
                 <div class="memory-input-box">
-                    <textarea id="new-memory-text" placeholder="¿Qué acaba de pasar? (Ej: '¡La cebolla huele increíble!')"></textarea>
-                    
+                    <textarea id="new-memory-text" placeholder="¿Qué acaba de pasar?"></textarea>
                     <div class="memory-controls">
                         <div class="file-input-wrapper">
                             <input type="file" id="new-memory-photo" accept="image/*">
@@ -125,15 +129,11 @@
                         <button id="btn-post-memory" class="btn-gold small">Publicar</button>
                     </div>
                 </div>
-
                 <div class="timeline-container">
                     <div class="timeline-line"></div>
-                    <div id="memories-feed">
-                        <p class="empty-state-text">Aún no hay momentos registrados.</p>
-                    </div>
+                    <div id="memories-feed"></div>
                 </div>
             </div>
-
         </section>
 
         <section id="screen-finish" class="screen hidden">
@@ -148,6 +148,17 @@
                     <div class="stat-box">
                         <span class="stat-num" id="final-badges-count">0</span>
                         <span class="stat-label">Badges</span>
+                    </div>
+                </div>
+                <div class="finance-card glass-panel">
+                    <h3>💰 Resumen de Costos</h3>
+                    <div class="cost-row">
+                        <span>Costo Total:</span>
+                        <span id="final-total-cost" class="gold-text">$0.00</span>
+                    </div>
+                    <div class="final-result-box">
+                        <span>Costo por persona (<span id="final-diners-display">0</span>):</span>
+                        <strong id="final-cost-per-person">$0.00</strong>
                     </div>
                 </div>
                 <div id="final-badges-display" class="badges-grid"></div>
